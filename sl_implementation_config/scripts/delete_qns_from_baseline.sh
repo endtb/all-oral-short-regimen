@@ -50,7 +50,6 @@ baseline_chronic_diseases=(
 				"Baseline, Chronic obstructive pulmonary disease"
 )
 
-
 delete_qns_baseline_template() {
 				for item in "${baseline_template[@]}";
                                         do
@@ -87,11 +86,13 @@ delete_qn_baseline_chronic_diseases() {
                                         done
 
 }
+
 delete_baseline_seizure() {
                                             
                                                 mysql -uroot -p$password openmrs -e "delete from concept_set where concept_id=(select concept_id from concept_name where name='Baseline, Seizure disorder') and concept_set=(select concept_id from concept_name where name='Baseline, Neurological');"
 
 }
+
 
 delete_qns_baseline_social_history
 delete_qns_baseline_past_tb_history
