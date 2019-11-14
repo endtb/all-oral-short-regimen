@@ -1,4 +1,3 @@
-
 -- Monthly Clinical Examination Log for the all-oral STR form
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Monthly Clinical Examination Log for the all-oral STR", "Monthly Clinical Examination Log", 'N/A', 'MISC', TRUE);
 set @concept1_id = @concept_id;
@@ -74,3 +73,29 @@ call add_concept_answer (@concept12_id,@answerconcept14_id,3);
 call add_concept_answer (@concept12_id,@answerconcept15_id,4);
 call add_concept_answer (@concept12_id,@answerconcept16_id,5);
 call add_concept_answer (@concept12_id,@answerconcept17_id,6);
+
+
+call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Followup, Present symptoms, issues and clinical exam", "Present symptoms, issues and clinical exam", 'N/A', 'MISC', TRUE);
+set @concept13_id = @concept_id;
+call add_concept_set_members(@concept13_id,(select concept_id from concept_name where name = "Followup, Present symptoms and issues" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), 0);
+call add_concept_set_members(@concept13_id,(select concept_id from concept_name where name = "Followup, Screening for on-going symptoms of active TB" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), 1);
+
+
+
+delete from concept_set where concept_set = (select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale = "en");
+
+set @concept14_id =  (select concept_id from concept_name where voided = 0 and locale = "en" and name = "Followup, Visit Date");
+set @concept15_id =  (select concept_id from concept_name where voided = 0 and locale = "en" and name = "Followup, Visit details");
+set @concept16_id =  (select concept_id from concept_name where voided = 0 and locale = "en" and name = "Followup, Clinical Examination");
+set @concept17_id =  (select concept_id from concept_name where voided = 0 and locale = "en" and name = "Followup, Followup questions for clinician reminder");
+set @concept18_id =  (select concept_id from concept_name where voided = 0 and locale = "en" and name = "Followup, Optional followup questions");
+set @concept19_id =  (select concept_id from concept_name where voided = 0 and locale = "en" and name = "Followup, Next visit");
+
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept14_id,0);
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept15_id,1);
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept13_id,2);
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept16_id,3);
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept17_id,4);
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept18_id,5);
+call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept19_id,6);
+
