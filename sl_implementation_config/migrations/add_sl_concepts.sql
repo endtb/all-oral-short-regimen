@@ -1,4 +1,3 @@
-
 -- Monthly Clinical Examination Log for the all-oral STR form
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Monthly Clinical Examination Log for the all-oral STR", "Monthly Clinical Examination Log", 'N/A', 'MISC', TRUE);
 set @concept1_id = @concept_id;
@@ -24,6 +23,10 @@ call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "6m
 set @answerconcept9_id = @concept_id;
 call add_concept_answer (@concept7_id,@answerconcept8_id,1);
 call add_concept_answer (@concept7_id,@answerconcept9_id,2);
+call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "6m PTO, no recurrence", "No recurrence", 'N/A', 'MISC', TRUE);
+set @concept9_id = @concept_id;
+call add_concept_set_members(@concept9_id,(select concept_id from concept_name where name = "6m PTO, If no recurrence"),0);
+
 
 -- Answers to recurrence on 6m PTO
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "6m PTO, If there is recurrence", "Recurrence", 'Coded', 'MISC', FALSE);
@@ -34,15 +37,18 @@ call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "6m
 set @answerconcept11_id = @concept_id;
 call add_concept_answer (@concept8_id,@answerconcept10_id,1);
 call add_concept_answer (@concept8_id,@answerconcept11_id,2);
+call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "6m PTO, Recurrence", "Recurrence", 'N/A', 'MISC', TRUE);
+set @concept10_id = @concept_id;
+call add_concept_set_members(@concept10_id,(select concept_id from concept_name where name = "6m PTO, If there is recurrence"),0);
 
 -- Addition to the 6MPTO from
 delete from concept_set where concept_set = (select concept_id from concept_name where name = "6 month Post Treatment Outcome Template" and voided = 0 and locale = "en");
 
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, 6 month post treatment outcome date" and voided = 0 and locale = "en"), 0);
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, 6 month post treatment outcome" and voided = 0 and locale = "en"), 1);
-call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, If no recurrence" and voided = 0 and locale = "en"), 2);
+call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, no recurrence" and voided = 0 and locale = "en"), 2);
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, Died" and voided = 0 and locale = "en"), 3);
-call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, If there is recurrence" and voided = 0 and locale = "en"), 4);
+call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, recurrence" and voided = 0 and locale = "en"), 4);
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, LTFU" and voided = 0 and locale = "en"), 5);
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, Not evaluated" and voided = 0 and locale = "en"), 6);
 
