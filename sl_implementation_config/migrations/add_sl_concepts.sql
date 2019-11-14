@@ -1,3 +1,4 @@
+
 -- Monthly Clinical Examination Log for the all-oral STR form
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Monthly Clinical Examination Log for the all-oral STR", "Monthly Clinical Examination Log", 'N/A', 'MISC', TRUE);
 set @concept1_id = @concept_id;
@@ -53,3 +54,23 @@ call add_concept_set_members((select concept_id from concept_name where name = "
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, Not evaluated" and voided = 0 and locale = "en"), 6);
 
 update concept_name set name = "Final post-treatment outcome" where voided = 0 and name = "6 month Post Treatment Outcome";
+
+-- Follow-up Visit Form
+call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Followup, Present symptoms and issues", "Present symptoms and issues", 'Text', 'MISC', FALSE);
+set @concept11_id = @concept_id;
+call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Followup, Screening for on-going symptoms of active TB", "On-going symptoms of active TB screen", 'Coded', 'MISC', FALSE);
+set @concept12_id = @concept_id;
+set @answerconcept12_id = (select concept_id from concept_name where name = "Cough" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+set @answerconcept13_id = (select concept_id from concept_name where name = "Massive hemoptysis" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+set @answerconcept14_id = (select concept_id from concept_name where name = "Dyspnea" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Followup, Night sweats", "Night sweats", 'N/A', 'MISC', FALSE);
+set @answerconcept15_id = @concept_id;
+set @answerconcept16_id = (select concept_id from concept_name where name = "Fever (oral)" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+set @answerconcept17_id = (select concept_id from concept_name where name = "Weight loss" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+
+call add_concept_answer (@concept12_id,@answerconcept12_id,1);
+call add_concept_answer (@concept12_id,@answerconcept13_id,2);
+call add_concept_answer (@concept12_id,@answerconcept14_id,3);
+call add_concept_answer (@concept12_id,@answerconcept15_id,4);
+call add_concept_answer (@concept12_id,@answerconcept16_id,5);
+call add_concept_answer (@concept12_id,@answerconcept17_id,6);
