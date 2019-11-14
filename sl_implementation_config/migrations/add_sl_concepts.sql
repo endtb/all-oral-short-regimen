@@ -1,3 +1,4 @@
+
 -- Monthly Clinical Examination Log for the all-oral STR form
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Monthly Clinical Examination Log for the all-oral STR", "Monthly Clinical Examination Log", 'N/A', 'MISC', TRUE);
 set @concept1_id = @concept_id;
@@ -11,6 +12,8 @@ set @concept5_id = (select concept_id from concept_name where name = "EKG, QTcF 
 call add_concept_set_members((select concept_id from concept_name where name = "Monthly Clinical Examination Log for the all-oral STR"), @concept5_id, 4);
 set @concept6_id = (select concept_id from concept_name where name = "Lab, Other test result" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
 call add_concept_set_members((select concept_id from concept_name where name = "Monthly Clinical Examination Log for the all-oral STR"), @concept6_id, 5);
+set @concept13_id = (select concept_id from concept_name where name = "Monthly Clinical Examination Log for the all-oral STR" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+call add_concept_set_members((select concept_id from concept_name where name = "All Observation Templates" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept13_id, 25);
 
 -- Answers to no recurrence on 6m PTO
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "6m PTO, If no recurrence", "If no recurrence", 'Coded', 'MISC', FALSE);
@@ -42,3 +45,5 @@ call add_concept_set_members((select concept_id from concept_name where name = "
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, If there is recurrence" and voided = 0 and locale = "en"), 4);
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, LTFU" and voided = 0 and locale = "en"), 5);
 call add_concept_set_members((select concept_id from concept_name where name = "6 month Post Treatment Outcome Template"), (select concept_id from concept_name where name = "6m PTO, Not evaluated" and voided = 0 and locale = "en"), 6);
+
+update concept_name set name = "Final post-treatment outcome" where voided = 0 and name = "6 month Post Treatment Outcome";
