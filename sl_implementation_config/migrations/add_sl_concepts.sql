@@ -74,13 +74,10 @@ call add_concept_answer (@concept12_id,@answerconcept15_id,4);
 call add_concept_answer (@concept12_id,@answerconcept16_id,5);
 call add_concept_answer (@concept12_id,@answerconcept17_id,6);
 
-
 call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Followup, Present symptoms, issues and clinical exam", "Present symptoms, issues and clinical exam", 'N/A', 'MISC', TRUE);
 set @concept13_id = @concept_id;
 call add_concept_set_members(@concept13_id,(select concept_id from concept_name where name = "Followup, Present symptoms and issues" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), 0);
 call add_concept_set_members(@concept13_id,(select concept_id from concept_name where name = "Followup, Screening for on-going symptoms of active TB" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), 1);
-
-
 
 delete from concept_set where concept_set = (select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale = "en");
 
@@ -99,3 +96,14 @@ call add_concept_set_members((select concept_id from concept_name where name = "
 call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept18_id,5);
 call add_concept_set_members((select concept_id from concept_name where name = "Followup Template" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED"), @concept19_id,6);
 
+-- lab hematology
+delete from concept_set where concept_set = (select concept_id from concept_name where name = "Lab, Haematology" and voided = 0 and locale = "en");
+
+set @concept20_id = (select concept_id from concept_name where name = "Lab, Haematology" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+set @concept21_id = (select concept_id from concept_name where name = "Lab, Hemoglobin" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+set @concept22_id = (select concept_id from concept_name where name = "Lab, RBC count" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+set @concept23_id = (select concept_id from concept_name where name = "Lab, Platelet count" and voided = 0 and locale="en" and concept_name_type="FULLY_SPECIFIED");
+
+call add_concept_set_members(@concept20_id,@concept21_id,0);
+call add_concept_set_members(@concept20_id,@concept22_id,1);
+call add_concept_set_members(@concept20_id,@concept23_id,2);
