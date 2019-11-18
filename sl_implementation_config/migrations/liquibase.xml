@@ -11,4 +11,14 @@
         <sqlFile path="add_sl_concepts.sql" stripComments="true" />
 </changeSet>
 
+<changeSet id="ALL-ORAL-STR-COHORT-201911181321" author="jmbabazi" runAlways="false" runOnChange="false">
+        <comment>Creating new concepts for cohort</comment>
+        <sqlFile path="cohorts.sql" stripComments="true" />
+</changeSet>
+
+<changeSet id="ALL-ORAL-STR-REGIMENTYPE-201911181325" author="jmbabazi" runAlways="false" runOnChange="false">
+        <comment>Creating new concepts for regimen type</comment>
+        <sqlFile path="type_of_regimen.sql" stripComments="true" />
+</changeSet>
+
 </databaseChangeLog>
