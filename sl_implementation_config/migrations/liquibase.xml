@@ -6,6 +6,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+<changeSet id="ALL-ORAL-STR-DELETE-COHORT-201912020453" author="jmbabazi" runAlways="false" runOnChange="false">
+        <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="1">
+                select count(*) from concept_name where name = "Belongs to external cohort" and voided = 0 and locale = "en" and concept_name_type = "FULLY_SPECIFIED";
+        </sqlCheck>
+        </preConditions>
+        <sql>
+            update concept_name set voided = 1 where name like "%Belongs to external cohort%";
+            delete from patient_program_attribute where attribute_type_id = (select program_attribute_type_id from program_attribute_type where name = "Belongs to external cohort");
+	    delete from program_attribute_type where name = "Belongs to external cohort";
+	</sql>
+</changeSet>
+
+<changeSet id="ALL-ORAL-STR-NEXT-VISIT-201912020454" author="jmbabazi" runAlways="false" runOnChange="false">
+        <preConditions onFail="MARK_RAN">
+        <sqlCheck expectedResult="0">
+                select count(*) from concept_name where name = "Scheduled visit" and voided = 0 and locale = "en" and concept_name_type = "FULLY_SPECIFIED";
+        </sqlCheck>
+        </preConditions>
+        <sql>
+		call add_concept(@concept_id, @concept_name_short_id, @concept_name_full_id, "Scheduled visit", "Scheduled visit", 'Boolean', 'MISC', FALSE);
+	        update concept set uuid = "1246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" where concept_id = (select concept_id from concept_name where name = "Scheduled visit" and voided = 0 and concept_name_type="FULLY_SPECIFIED");	
+        </sql>
+</changeSet>
+
 <changeSet id="ALL-ORAL-STR-201911151431" author="jmbabazi" runAlways="false" runOnChange="false">
 	<comment>Creating new concepts</comment>
         <sqlFile path="add_sl_concepts.sql" stripComments="true" />
