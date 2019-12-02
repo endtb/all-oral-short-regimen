@@ -107,3 +107,7 @@ set @concept23_id = (select concept_id from concept_name where name = "Lab, Plat
 call add_concept_set_members(@concept20_id,@concept21_id,0);
 call add_concept_set_members(@concept20_id,@concept22_id,1);
 call add_concept_set_members(@concept20_id,@concept23_id,2);
+
+-- Followup, Visit details
+delete from concept_set where concept_set = (select concept_id from concept_name where name = "Followup, Visit details" and voided = 0 and concept_name_type = "FULLY_SPECIFIED");
+call add_concept_set_members((select concept_id from concept_name where name = "Followup, Visit details" and voided = 0 and concept_name_type = "FULLY_SPECIFIED"), (select concept_id from concept_name where name = "Scheduled visit" and voided = 0 and concept_name_type = "FULLY_SPECIFIED"),0);
