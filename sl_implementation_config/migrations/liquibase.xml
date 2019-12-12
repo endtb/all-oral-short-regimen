@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -44,6 +45,11 @@
 <changeSet id="ALL-ORAL-STR-REGIMENTYPE-201911181325" author="jmbabazi" runAlways="false" runOnChange="false">
         <comment>Creating new concepts for regimen type</comment>
         <sqlFile path="type_of_regimen.sql" stripComments="true" />
+</changeSet>
+
+<changeSet id="ALL-ORAL-STR-TI-201912120324" author="jmbabazi" runAlways="false" runOnChange="false">
+        <comment>Creating new concepts for Treatment Initiation</comment>
+        <sqlFile path="treatment_inititiation.sql" stripComments="true" />
 </changeSet>
 
 </databaseChangeLog>
