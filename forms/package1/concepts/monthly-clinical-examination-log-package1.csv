@@ -1,0 +1,4 @@
+Uuid,Void/Retire,Same as mappings,Fully specified name:en,Short name:en,Short name:ru,Short name:pr,Data class,Data type,Members,Answers
+eec8fd6c-1acc-11eb-adc1-0242ac120002,,,"All Oral STR, Other clinical Exam",Other,,,Misc,Text,,
+eec90032-1acc-11eb-adc1-0242ac120002,,,"All Oral STR, Clinical Examination",Clinical Examination,,,Misc,N/A,Weight (kg); Height (cm); BMI Data,
+eec9019a-1acc-11eb-adc1-0242ac120002,,,"All Oral STR, Monthly Clinical Examination Log",Monthly Clinical Examination Log,,,Misc,N/A,"Followup, Visit Date; All Oral STR, Clinical Examination; Followup, Brief Peripheral Neuropathy Screen; Followup, Visual Acuity; Followup, Correct plates; All Oral STR, Other clinical Exam",
